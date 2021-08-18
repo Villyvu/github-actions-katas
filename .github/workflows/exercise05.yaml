@@ -1,0 +1,19 @@
+name: Java CI
+on: push
+jobs:
+  Clone-down:
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+  Test:
+    needs: Clone-down
+    steps:
+    - name: Test
+      run: ci/unit-test-app.sh
+  Build:
+    needs: Clone-down
+    steps:
+    - name: build
+      run: ci/build-app.sh
